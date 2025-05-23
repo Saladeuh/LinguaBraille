@@ -3,6 +3,7 @@ using LinguaBraille;
 using LinguaBraille.MiniGames;
 using LinguaBraille.Save;
 using Microsoft.Xna.Framework;
+using Octokit;
 using SharpLouis;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 namespace BrailleJP;
 public partial class Game1 : Game
 {
+  public const string VERSION = "v0.9.7";
   private readonly GameState _gameState;
 
   public static LibLouisLoggingClient LibLouisLoggingClient { get; set; } = new LibLouisLoggingClient();
@@ -19,6 +21,7 @@ public partial class Game1 : Game
   public Wrapper InputBrailleTranslator { get; set; }
   private BrailleTableParser BrailleParser { get; set; }
   public Dictionary<string, List<BrailleEntry>> BrailleTables { get; set; }
+  public GitHubClient GitHubApiClient { get; }
   private IMiniGame CurrentPlayingMiniGame { get; set; } = null;
   public Game1()
   {
@@ -38,6 +41,7 @@ public partial class Game1 : Game
     _gameState = new GameState();
     BrailleParser = new BrailleTableParser(@"LibLouis\tables");
     BrailleTables = [];
+    GitHubApiClient = new GitHubClient(new ProductHeaderValue("LinguaBraille"));
     Instance = this; // Set the static instance
   }
 

@@ -1,18 +1,22 @@
-﻿using LinguaBraille.Content;
-using CrossSpeak;
+﻿using CrossSpeak;
 using LinguaBraille;
+using LinguaBraille.Content;
 using LinguaBraille.MiniGames;
 using LinguaBraille.Save;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Octokit;
+using SharpLouis;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BrailleJP;
 
 public partial class Game1
 {
   private bool _firstScreenTipsSayed = false;
+  private string _latestVersionUrl="";
 
   protected override void Update(GameTime gameTime)
   {
@@ -30,10 +34,33 @@ public partial class Game1
     KeyboardState currentKeyboardState = new(allPressedKeys.ToArray());
     MouseState currentMouseState = Mouse.GetState();
 
-    if (!_firstScreenTipsSayed && gameTime.TotalGameTime.Seconds >= 2 && Save.Flags.EmptySave)
+    if (!_firstScreenTipsSayed && gameTime.TotalGameTime.Seconds >= 2)
     {
+      List<Release> releases = [];
+      try
+      {
+        Task<IReadOnlyList<Release>> task = GitHubApiClient.Repository.Release.GetAll("saladeuh", "LinguaBraille");
+        task.Wait();
+        releases = task.Result.ToList();
+      }
+      catch
+      {
+      }
+      if (Save.Flags.EmptySave)
+      {
+        CrossSpeakManager.Instance.Output(GameText.Tips);
+      }
+      else if (releases.Count > 0)
+      {
+        var latest = releases.ElementAt(0);
+        if (latest.TagName != VERSION)
+        {
+          UIVictorySound.Play();
+          CrossSpeakManager.Instance.Output(latest.TagName);
+          _latestVersionUrl = latest.AssetsUrl;
+        }
+      }
       _firstScreenTipsSayed = true;
-      CrossSpeakManager.Instance.Output(GameText.Tips);
     }
     _desktop.UpdateInput();
     HandleKeyboardNavigation(currentKeyboardState);

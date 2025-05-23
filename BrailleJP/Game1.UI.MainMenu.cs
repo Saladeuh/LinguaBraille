@@ -3,6 +3,7 @@ using LinguaBraille;
 using LinguaBraille.UI;
 using Myra.Graphics2D.UI;
 using System.Diagnostics;
+using CrossSpeak;
 
 namespace BrailleJP;
 
@@ -103,6 +104,27 @@ public partial class Game1
       });
     };
     mainMenuGrid.Widgets.Add(wikiButton);
+
+    ConfirmButton updateButton = new(GameText.Main_menu_wiki)
+    {
+      Id = "updateButton"
+    };
+    updateButton.Click += (_, _) =>
+    {
+      if (string.Empty!=_latestVersionUrl)
+      {
+        Process.Start(new ProcessStartInfo
+        {
+          FileName = _latestVersionUrl,
+          UseShellExecute = true
+        });
+      }
+      else
+      {
+        CrossSpeakManager.Instance.Output("nop");
+      }
+    };
+    mainMenuGrid.Widgets.Add(updateButton);
 
     BackButton quitButton = new(GameText.Quit)
     {
