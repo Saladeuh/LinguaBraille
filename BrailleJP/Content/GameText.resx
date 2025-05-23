@@ -82,4 +82,13 @@ Pour réécouter le signe, appuyez sur 0.</value>
 	<data name="Main_menu_word_practice" xml:space="preserve">
     <value>Entraînement : Écriture de mots</value>
   </data>
+	<data name="Main_menu_no_update" xml:space="preserve">
+    <value>Il n'y a pas de mise à jour disponible.</value>
+  </data>
+	<data name="Main_menu_update_available" xml:space="preserve">
+    <value>Une nouvelle mise à jour est disponible : {0}</value>
+  </data>
+	<data name="Main_menu_update_download" xml:space="preserve">
+    <value>Télécharger la dernière mise à jour.</value>
+  </data>
 </root>

@@ -105,7 +105,7 @@ public partial class Game1
     };
     mainMenuGrid.Widgets.Add(wikiButton);
 
-    ConfirmButton updateButton = new(GameText.Main_menu_wiki)
+    ConfirmButton updateButton = new(GameText.Main_menu_update_download)
     {
       Id = "updateButton"
     };
@@ -121,7 +121,7 @@ public partial class Game1
       }
       else
       {
-        CrossSpeakManager.Instance.Output("nop");
+        CrossSpeakManager.Instance.Output(GameText.Main_menu_no_update);
       }
     };
     mainMenuGrid.Widgets.Add(updateButton);

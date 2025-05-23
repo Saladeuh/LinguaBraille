@@ -146,6 +146,15 @@ namespace LinguaBraille.Content {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Il n&apos;y a pas de mise à jour disponible..
+        /// </summary>
+        internal static string Main_menu_no_update {
+            get {
+                return ResourceManager.GetString("Main_menu_no_update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Paramètres.
         /// </summary>
         internal static string Main_menu_settings {
@@ -178,6 +187,24 @@ namespace LinguaBraille.Content {
         internal static string Main_menu_title {
             get {
                 return ResourceManager.GetString("Main_menu_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Une nouvelle mise à jour est disponible : {0}.
+        /// </summary>
+        internal static string Main_menu_update_available {
+            get {
+                return ResourceManager.GetString("Main_menu_update_available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Télécharger la dernière mise à jour..
+        /// </summary>
+        internal static string Main_menu_update_download {
+            get {
+                return ResourceManager.GetString("Main_menu_update_download", resourceCulture);
             }
         }
         

@@ -56,8 +56,8 @@ public partial class Game1
         if (latest.TagName != VERSION)
         {
           UIVictorySound.Play();
-          CrossSpeakManager.Instance.Output(latest.TagName);
-          _latestVersionUrl = latest.AssetsUrl;
+          CrossSpeakManager.Instance.Output(string.Format(GameText.Main_menu_update_available, latest.TagName));
+          _latestVersionUrl = latest.HtmlUrl;
         }
       }
       _firstScreenTipsSayed = true;

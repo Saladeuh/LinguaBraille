@@ -82,4 +82,13 @@ To hear the sign again, press 0.</value>
 	<data name="Main_menu_word_practice" xml:space="preserve">
     <value>Training : Write words</value>
   </data>
+	<data name="Main_menu_no_update" xml:space="preserve">
+    <value>No update available.</value>
+  </data>
+	<data name="Main_menu_update_available" xml:space="preserve">
+    <value>A new update is available on download : {0}</value>
+  </data>
+	<data name="Main_menu_update_download" xml:space="preserve">
+    <value>Download latest update.</value>
+  </data>
 </root>
