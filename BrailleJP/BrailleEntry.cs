@@ -1,5 +1,6 @@
 ﻿using BrailleJP;
 using Microsoft.Xna.Framework.Audio;
+using Octokit;
 using System;
 using System.IO;
 
@@ -51,25 +52,37 @@ public class BrailleEntry
     }
   }
   public SoundEffectInstance Voice { get; set; }
-  public BrailleEntry(string opcode, string characters, string sourceFile, string dotPattern = "", string comment = "")
+  public BrailleEntry(string opcode, string characters, string originTable, string sourceFile, string dotPattern = "", string comment = "")
   {
     Opcode = opcode;
     Characters = characters;
     DotPattern = dotPattern;
     Comment = comment;
     SourceFile = sourceFile;
-    var fileNameWithoutExt = Path.GetFileNameWithoutExtension(SourceFile);
-    var soundPath = $"speech/{fileNameWithoutExt}/{DotPattern}";
-    try
+    if (Opcode != "include" && Opcode != "noback")
     {
-      Voice = Game1.Instance.Content.Load<SoundEffect>(soundPath).CreateInstance();
-      Voice.Volume = 1;
-    }
-    catch (Exception)
-    {
-      Voice = null;
+      try
+      {
+        var fileNameWithoutExt = Path.GetFileNameWithoutExtension(originTable);
+        var directory = $"speech/{fileNameWithoutExt}";
+        var soundPath = directory + "/" + dotPattern;
+        var files = Directory.GetFiles(Path.Combine(Game1.Instance.Content.RootDirectory, directory), dotPattern + ".*");
+        if (files.Length > 0)
+        {
+          Voice = Game1.Instance.Content.Load<SoundEffect>(soundPath).CreateInstance();
+          Voice = Game1.Instance.Content.Load<SoundEffect>(soundPath).CreateInstance();
+          Voice.Volume = 1;
+        }
+        else
+        {
+          Voice = null;
+        }
+      }
+      catch
+      {
+        Voice = null;
+      }
     }
   }
-
   public bool IsLowercaseLetter() => Opcode == "lowercase" || Opcode == "letter";
 }

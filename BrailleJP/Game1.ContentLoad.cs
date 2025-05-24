@@ -33,9 +33,6 @@ public partial class Game1
     UIVictorySound = Content.Load<SoundEffect>("ui/confirmation_004");
     UIFailSound = Content.Load<SoundEffect>("ui/Cartoon Toy Squeaky Toy Squeaks 01");
     UIViewScrollSound = Content.Load<SoundEffect>("ui/view/PM_FSSF2_USER_INTERFACE_SIMPLE_56");
-    //string tablePath = Game1.SUPPORTEDBRAILLETABLES.First().Value;
-    //var entries = BrailleParser.ParseFile(tablePath);
-    MediaPlayer.IsRepeating = true;
     MediaPlayer.Volume = 0.3f;
     SoundEffect.MasterVolume = 1f;
     MyraEnvironment.Game = this;
@@ -56,6 +53,7 @@ public partial class Game1
     }
     foreach (var table in SUPPORTEDBRAILLETABLES.Values)
     {
+      BrailleParser = new BrailleTableParser(@"LibLouis\tables");
       BrailleTables[table] = BrailleParser.ParseFile(table);
     }
     CreateMainMenu();

@@ -106,6 +106,7 @@ public partial class BrailleTableParser
     {
       return new BrailleEntry("include",
         line[(line.IndexOf("include ") + 8)..].Trim(),
+        sourceFile,
         sourceFile
       );
     }
@@ -130,10 +131,13 @@ public partial class BrailleTableParser
       comment = string.Join(" ", parts.Skip(commentIndex).Select(p => p.TrimStart('#').Trim()));
       parts = parts.Take(commentIndex).ToArray();
     }
-
+    var originTableFile = sourceFile;
+    if (_processedFiles.Count > 0)
+      originTableFile = _processedFiles.First();
     BrailleEntry entry = new(parts[0].ToLower(),
       ProcessEscapeSequences(parts[1]),
-           sourceFile,
+      originTableFile,
+      sourceFile,
  parts.Length > 2 ? parts[2] : "",
       comment
     );
