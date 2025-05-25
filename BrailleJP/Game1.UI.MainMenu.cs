@@ -13,7 +13,7 @@ public partial class Game1
   {
     _mainMenuPanel = new Panel();
 
-    VerticalStackPanel mainMenuGrid = new()
+    VerticalStackPanel grid = new()
     {
       Spacing = 20,
       HorizontalAlignment = HorizontalAlignment.Center,
@@ -24,10 +24,10 @@ public partial class Game1
       Text = GameText.Main_menu_title,
       HorizontalAlignment = HorizontalAlignment.Center
     };
-    mainMenuGrid.Widgets.Add(titleLabel);
+    grid.Widgets.Add(titleLabel);
 
     // Space
-    mainMenuGrid.Widgets.Add(new Label { Text = "" });
+    grid.Widgets.Add(new Label { Text = "" });
 
     ConfirmButton tableViewButton = new(GameText.Main_menu_table)
     {
@@ -37,7 +37,7 @@ public partial class Game1
     {
       SwitchToScreen(GameScreen.BrailleTableView);
     };
-    mainMenuGrid.Widgets.Add(tableViewButton);
+    grid.Widgets.Add(tableViewButton);
 
     ConfirmButton choicePracticeButton = new(GameText.Main_menu_choice)
     {
@@ -47,7 +47,7 @@ public partial class Game1
     {
       SwitchToScreen(GameScreen.ChoicePractice);
     };
-    mainMenuGrid.Widgets.Add(choicePracticeButton);
+    grid.Widgets.Add(choicePracticeButton);
 
     ConfirmButton wordPracticeButton = new(GameText.Main_menu_word_practice)
     {
@@ -57,7 +57,7 @@ public partial class Game1
     {
       SwitchToScreen(GameScreen.WordPractice);
     };
-    mainMenuGrid.Widgets.Add(wordPracticeButton);
+    grid.Widgets.Add(wordPracticeButton);
 
     ConfirmButton basicPracticeButton = new(GameText.Main_menu_basicpractice)
     {
@@ -67,7 +67,7 @@ public partial class Game1
     {
       SwitchToScreen(GameScreen.BasicPractice);
     };
-    mainMenuGrid.Widgets.Add(basicPracticeButton);
+    grid.Widgets.Add(basicPracticeButton);
 #if false
     ConfirmButton settingsButton = new(GameText.Main_menu_settings)
     {
@@ -89,7 +89,7 @@ public partial class Game1
       SwitchToScreen(GameScreen.First);
     };
 
-    mainMenuGrid.Widgets.Add(tipsButton);
+    grid.Widgets.Add(tipsButton);
 
     ConfirmButton wikiButton = new(GameText.Main_menu_wiki)
     {
@@ -103,7 +103,17 @@ public partial class Game1
         UseShellExecute = true
       });
     };
-    mainMenuGrid.Widgets.Add(wikiButton);
+    grid.Widgets.Add(wikiButton);
+
+    ConfirmButton choiceTableButton = new(GameText.Main_menu_tips)
+    {
+      Id = "choiceTableButton"
+    };
+    choiceTableButton.Click += (_, _) =>
+    {
+      SwitchToScreen(GameScreen.ChoiceTable);
+    };
+    grid.Widgets.Add(choiceTableButton);
 
     ConfirmButton updateButton = new(GameText.Main_menu_update_download)
     {
@@ -124,7 +134,7 @@ public partial class Game1
         CrossSpeakManager.Instance.Output(GameText.Main_menu_no_update);
       }
     };
-    mainMenuGrid.Widgets.Add(updateButton);
+    grid.Widgets.Add(updateButton);
 
     BackButton quitButton = new(GameText.Quit)
     {
@@ -134,9 +144,9 @@ public partial class Game1
     {
       Exit();
     };
-    mainMenuGrid.Widgets.Add(quitButton);
+    grid.Widgets.Add(quitButton);
 
-    _mainMenuPanel.Widgets.Add(mainMenuGrid);
+    _mainMenuPanel.Widgets.Add(grid);
     _desktop.FocusedKeyboardWidget = tableViewButton;
   }
 }

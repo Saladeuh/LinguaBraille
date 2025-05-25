@@ -21,13 +21,16 @@ public partial class Game1
   private void SwitchToScreen(GameScreen screen)
   {
     _gameState.CurrentScreen = screen;
-    CultureInfo culture = SUPPORTEDBRAILLETABLES.Keys.First();
+    CultureInfo culture = TableToLearn;
     switch (screen)
     {
       case GameScreen.First:
         _desktop.Root = _firstScreenPanel;
         Widget tipsLabel = _firstScreenPanel.FindChildById("tipsLabel");
         tipsLabel?.SetKeyboardFocus();
+        break;
+      case GameScreen.ChoiceTable:
+        _desktop.Root = _tableToLearnPanel;
         break;
       case GameScreen.MainMenu:
         _desktop.Root = _mainMenuPanel;

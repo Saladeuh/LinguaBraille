@@ -59,6 +59,7 @@ public partial class Game1
     CreateMainMenu();
     CreateSettingsUI();
     CreateFirstScreen();
+    CreateTableToLearnScreen();
     SwitchToScreen(Save.Flags.EmptySave ? GameScreen.First : GameScreen.MainMenu);
   }
 }

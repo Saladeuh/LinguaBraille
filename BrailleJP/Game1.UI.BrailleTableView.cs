@@ -5,6 +5,7 @@ using Myra.Graphics2D.UI;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace BrailleJP;
 
@@ -36,6 +37,7 @@ public partial class Game1
     entries.Sort((e1, e2) => String.Compare(e1.Characters, e2.Characters, culture, CompareOptions.None));
     if (culture.IetfLanguageTag == "ja-JP")
       entries.SortByGojuon(e => e.Characters);
+    entries = entries.Where(e => e.Voice != null).ToList();
     foreach (BrailleEntry entry in entries)
     {
       if (entry.IsLowercaseLetter())

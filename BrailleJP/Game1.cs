@@ -3,6 +3,7 @@ using LinguaBraille;
 using LinguaBraille.MiniGames;
 using LinguaBraille.Save;
 using Microsoft.Xna.Framework;
+using Myra;
 using Octokit;
 using SharpLouis;
 using System;
