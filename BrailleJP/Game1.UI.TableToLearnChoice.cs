@@ -4,6 +4,7 @@ using LinguaBraille;
 using LinguaBraille.UI;
 using Myra.Graphics2D.UI;
 using System.Globalization;
+using System.Linq;
 
 namespace BrailleJP;
 
@@ -11,7 +12,7 @@ public partial class Game1
 {
   private Panel _tableToLearnPanel;
 
-  public CultureInfo TableToLearn { get; private set; }
+  public CultureInfo TableToLearn { get; private set; } = SUPPORTEDBRAILLETABLES.Keys.First();
 
   private void CreateTableToLearnScreen()
   {
@@ -27,7 +28,7 @@ public partial class Game1
     {
       Text = "choisi",
       HorizontalAlignment = HorizontalAlignment.Center
-    };
+    }; 
     grid.Widgets.Add(titleLabel);
 
     // Space
@@ -36,10 +37,10 @@ public partial class Game1
     {
       ConfirmButton choiceButton = new(pair.Key.NativeName);
       choiceButton.Click += (_, _) =>
-      {
-        TableToLearn = pair.Key;
-        SwitchToScreen(GameScreen.MainMenu);
-      };
+            {
+              TableToLearn = pair.Key;
+              SwitchToScreen(GameScreen.MainMenu);
+            };
       grid.Widgets.Add(choiceButton);
     }
 

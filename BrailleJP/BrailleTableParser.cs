@@ -134,15 +134,21 @@ public partial class BrailleTableParser
     var originTableFile = sourceFile;
     if (_processedFiles.Count > 0)
       originTableFile = _processedFiles.First();
-    BrailleEntry entry = new(parts[0].ToLower(),
-      ProcessEscapeSequences(parts[1]),
-      originTableFile,
-      sourceFile,
- parts.Length > 2 ? parts[2] : "",
-      comment
-    );
-
-    return IsValidOpcode(entry.Opcode) ? entry : null;
+    if (parts.Length > 1)
+    {
+      BrailleEntry entry = new(parts[0].ToLower(),
+        ProcessEscapeSequences(parts[1]),
+        originTableFile,
+        sourceFile,
+        parts.Length > 2 ? parts[2] : "",
+        comment
+      );
+      return IsValidOpcode(entry.Opcode) ? entry : null;
+    }
+    else
+    {
+      return null;
+    }
   }
   public List<BrailleEntry> ParseFile(string filePath, FileEncoding encoding = FileEncoding.UTF8)
   {

@@ -7,6 +7,7 @@ public partial class Game1
 {
   public static readonly Dictionary<CultureInfo, string> SUPPORTEDBRAILLETABLES = new()
   {
+    {new CultureInfo("ru-RU"), "ru-comp8.utb" },
     {new CultureInfo("ja-Jp"), "ja-jp-comp6.utb" },
     {new CultureInfo("fr-FR"), "fr-bfu-comp8.utb" }
   };
